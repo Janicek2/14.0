@@ -25,13 +25,48 @@ var movies = [
 }
 ];
 
-var moviesElements = movies.map(function(movie) {
-return React.createElement('li', {},
-    React.createElement('h2', {}, movie.title),
-    React.createElement('p', {}, movie.desc),
-    React.createElement('img', {src: movie.poster})
-    );
+var MovieList = React.createClass({
+    propTypes: {
+        movie: React.PropTypes.object.isRequired,
+    },
+    render: function() {
+        return (
+            React.createElement('li', {},
+                React.createElement(MovieTitle, {movies: this.props.movie}),
+                React.createElement(MovieDesc, {movies: this.props.movie}),
+                React.createElement(MoviePoster, {movies: this.props.movie})
+            )
+        );
+    }
 });
+
+var MovieTitle = React.createClass({
+	propTypes: {    movie: React.PropTypes.object.isRequired,  },
+	render: function() {
+		return (          
+            React.createElement("h1", {}, this.props.movie.title)
+        );
+	}
+});
+
+var MovieDesc = React.createClass({
+	propTypes: {    movie: React.PropTypes.object.isRequired,  },
+	render: function() {
+		return (
+            React.createElement("p", {}, this.props.movie.desc)
+            );
+	}
+});
+
+var MoviePoster = React.createClass({
+	propTypes: {    movie: React.PropTypes.object.isRequired,  },
+	render: function() {
+		return (         
+            React.createElement("p", {}, this.props.movie.poster)
+            );
+	}
+});
+
 
 var element =
 React.createElement('div', {},
